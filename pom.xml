@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.xinxiamu</groupId>
+  <artifactId>kaptcha</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.9</version>
+  <name>mu-kaptcha</name>
+  <description>A web kaptcha generation engine</description>
+  <url>https://github.com/axet/kaptcha</url>
+  <licenses>
+    <license>
+      <name>Apache License v2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <properties>
+    <nexus.url>http://nexus-server:8081</nexus.url>
+  </properties>
+
+ <!-- <scm>
+    <url>https://github.com/axet/kaptcha</url>
+    <connection>scm:git:https://github.com/axet/kaptcha</connection>
+  </scm>-->
+
+  <!--mavne 发布-->
+  <distributionManagement>
+    <snapshotRepository>
+      <!--这里id要和maven的setting.xml中配置的一致-->
+      <id>snapshots</id>
+      <name>maven-snapshots</name>
+      <url>${nexus.url}/repository/maven-snapshots/</url>
+    </snapshotRepository>
+    <repository>
+      <id>repository</id>
+      <name>maven-releases</name>
+      <url>${nexus.url}/repository/maven-releases/</url>
+    </repository>
+  </distributionManagement>
+
+  <developers>
+    <developer>
+      <id>xinxiamu</id>
+      <name>xinxiamu javaer</name>
+      <email>932852117@qq.com</email>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.10</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.jhlabs</groupId>
+      <artifactId>filters</artifactId>
+      <version>2.0.235</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <configuration>
+          <useAgent>true</useAgent>
+        </configuration>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>deploy</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>deploy</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.4.3</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <!--单元测试插件-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M3</version>
+        <configuration>
+          <!--不运行单元测试-->
+          <skipTests>true</skipTests>
+          <!-- set heap size to work around http://github.com/travis-ci/travis-ci/issues/3396 -->
+          <!--<argLine>-Xmx1024m</argLine>-->
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
