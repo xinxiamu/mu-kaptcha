@@ -1,2 +1,2 @@
 # mu-kaptcha
-clone of http://code.google.com/p/kaptcha/
+https://code.google.com/archive/p/kaptcha/downloads
